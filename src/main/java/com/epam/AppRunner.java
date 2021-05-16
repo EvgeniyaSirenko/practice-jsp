@@ -13,7 +13,7 @@ public class AppRunner extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		resp.getWriter().append("Served at: ").append(req.getContextPath());
+		getServletContext().getRequestDispatcher("/result.jsp").forward(req, resp);
 	}
 
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -24,8 +24,6 @@ public class AppRunner extends HttpServlet {
 		int data = Integer.valueOf(req.getParameter("data"));
 		int ctr = Integer.valueOf(counter) + data;
 		getServletContext().setAttribute("counter", String.valueOf(ctr));
-		resp.getWriter().append(String.valueOf(ctr));
-		// getServletContext().getRequestDispatcher("/result").forward(req, resp);
-		//doGet(req, resp);
+		doGet(req, resp);
 	}
 }
